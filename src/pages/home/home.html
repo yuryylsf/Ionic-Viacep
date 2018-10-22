@@ -6,21 +6,11 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>LOGIN</h3>
-
-  <ion-list>
-
+  <form [formGroup]="formGroup" (ngSubmit)="buscaCEP()">
     <ion-item>
-      <ion-label stacked>Username</ion-label>
-      <ion-input type="text"></ion-input>
+        <ion-label stacked>Digite o CEP</ion-label>
+        <ion-input type="text" formControlName="cep"></ion-input>
     </ion-item>
-  
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-  
-  </ion-list>
-  <button ion-button block (click)="login()">ENTRAR</button>
-  <button ion-button block outline>REGISTRAR</button>
+    <button ion-button block type="submit">Buscar</button>
+  </form>
 </ion-content>

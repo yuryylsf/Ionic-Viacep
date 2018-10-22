@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { EnderecoService } from '../../service/endereco.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -7,13 +9,21 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  formGroup : FormGroup;
 
+  constructor(public navCtrl: NavController,
+            public service : EnderecoService,
+            public formBuilder : FormBuilder ) {
+    this.formGroup = this.formBuilder.group({
+      //Campos do formulários
+      cep : ['', [Validators.required,
+      Validators.minLength(8), Validators.maxLength(8)]]
+    });
   }
-  login(){
-    this.navCtrl.setRoot('CategoriasPage');
-  }
-
- 
-
+ buscaCEP(){
+   this.service.getEndereco(this.formGroup.value['cep'])
+   .subscribe(response => { 
+    console.log(response);
+   });
+ }
 }
